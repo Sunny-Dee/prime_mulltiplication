@@ -56,6 +56,10 @@ var testCreateMatrix = []struct {
 		input:    []int{2, 4},
 		expected: [][]int{{4, 8}, {8, 16}},
 	},
+	{
+		input:    []int{2},
+		expected: [][]int{{4}},
+	},
 }
 
 func TestIsPrime(t *testing.T) {

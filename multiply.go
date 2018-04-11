@@ -52,7 +52,6 @@ func isPrime(num int) bool {
 
 func createMatrix(primes []int) [][]int {
 	rows := make([][]int, len(primes))
-	//create rows for each number
 	for i, multiplicand := range primes {
 		rows[i] = make([]int, len(primes))
 		for j, multiplier := range primes {
@@ -64,13 +63,6 @@ func createMatrix(primes []int) [][]int {
 }
 
 func createTable(header []int, matrix [][]int) {
-	// formHeader := make([]string, len(header))
-	// for i := 0; i < len(header); i++ {
-	// 	formHeader[i] = strconv.Itoa(header[i])
-	// }
-	//
-	// headerStr := strings.Join(formHeader, " | ")
-
 	fmt.Printf("     %-4v\n", header)
 	fmt.Println(strings.Repeat("-", (len(header)*5)+5))
 
@@ -80,19 +72,23 @@ func createTable(header []int, matrix [][]int) {
 }
 
 func main() {
-	var r int
+	var input int
 	if len(os.Args) != 2 {
 		fmt.Println("Running multiplication table with default N=10.")
-		r = 10
+		input = 10
 	} else {
 		var err error
-		r, err = strconv.Atoi(os.Args[1])
+		input, err = strconv.Atoi(os.Args[1])
 		if err != nil {
 			fmt.Println("Error parsing parameter. Must be an integer.")
 		}
 	}
-	fmt.Println("got num", r)
-	result, _ := findNPrimes(r)
+	fmt.Println("Running multiplication table with N=", input)
+	result, err := findNPrimes(input)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
 	matrix := createMatrix(result)
 	createTable(result, matrix)
 }
